@@ -1,0 +1,41 @@
+/* ── Global reset ───────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  background: #05080f;
+  overflow-x: hidden;
+}
+
+.app-root {
+  position: relative;
+  min-height: 100vh;
+}
+
+/* ── Unlock flash overlay ───────────────────────────────────────── */
+.unlock-flash {
+  position: fixed;
+  inset: 0;
+  z-index: 500;
+  pointer-events: none;
+  background: #e8e8e8;
+  animation: unlockFlash 1.4s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes unlockFlash {
+  0%   { opacity: 0;    }
+  18%  { opacity: 0.65; }
+  100% { opacity: 0;    }
+}
