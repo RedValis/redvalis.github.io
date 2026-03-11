@@ -25,8 +25,8 @@ const MODULES = {
       },
       {
         id: 'indie',
-        label: 'Indie',
-        desc: 'Transmissions from the Underground · Unclassified Frequencies',
+        label: 'Blueberry Seeds',
+        desc: 'No further information',
         href: 'https://open.spotify.com/playlist/3tdgSqFmvoG4PHPra79zMR?si=69147457d7e04a27',
         icon: <IconSpotify />,
       },
