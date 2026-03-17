@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Duckies!!!!</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="description" content="Duck pictures, ts tuff">
+    <meta name="twitter:image:src" content="https://cdn.discordapp.com/attachments/1149735003933122670/1241435246612975736/6d99fb08a7ed3f03b26c688d49afa5e9.png?ex=664a302b&is=6648deab&hm=d287af9a90b2990233c4e2ee2bd29b2618aa3df91a4d7c606b28ea0f8fed1c2d&">
+    <meta name="twitter:site" content="@HelcialHelios">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="lowkey ducks">
+    <meta name="twitter:description" content="Duck pictures, ts tuff">
+    <meta property="og:image" content="https://cdn.discordapp.com/attachments/1149735003933122670/1241435246612975736/6d99fb08a7ed3f03b26c688d49afa5e9.png?ex=664a302b&is=6648deab&hm=d287af9a90b2990233c4e2ee2bd29b2618aa3df91a4d7c606b28ea0f8fed1c2d&">
+    <meta property="og:image:alt" content="Duck pictures, ts tuff">
+    <meta property="og:image:width" content="512">
+    <meta property="og:image:height" content="204">
+    <meta property="og:site_name" content="Lowkey, ducks">
+    <meta property="og:type" content="object">
+    <meta property="og:title" content="Ducks">
+    <meta property="og:url" content="https://redvalis.github.io/cordy">
+    <meta property="og:description" content="Duck pictures, ts tuff">
+    <meta name="expected-hostname" content="https://redvalis.github.io/cordy/">
+    <meta name="theme-color" content="#33ee99">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+            font-family: 'Roboto', sans-serif;
+            transition: background-color 0.5s;
+        }
+        #container {
+            text-align: center;
+        }
+        h1 {
+            font-size: 2rem;
+            color: #333;
+            margin-bottom: 20px;
+        }
+        img {
+            cursor: pointer;
+            max-width: 90%;
+            max-height: 80vh;
+            border-radius: 10px;
+            transition: filter 0.5s, transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        .loading {
+            filter: brightness(50%);
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <img id="duckImage" src="https://random-d.uk/api/213.jpg" alt="Random Duck" onclick="changeDuck()">
+    </div>
+    
+    <script>
+        let duckUrls = [];
+
+        // Fetch the duck URLs from the text file
+        fetch('Media-DB/duckpics.txt')
+            .then(response => response.text())
+            .then(data => {
+                duckUrls = data.split('\n').filter(url => url.trim() !== '');
+            });
+
+        function getRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function changeDuck() {
+            const duckImage = document.getElementById('duckImage');
+            if (duckUrls.length > 0) {
+                const randomIndex = Math.floor(Math.random() * duckUrls.length);
+                const newDuckUrl = duckUrls[randomIndex];
+
+                // Add loading class
+                duckImage.classList.add('loading');
+
+                // Create a temporary image to preload the new duck image
+                const tempImg = new Image();
+                tempImg.src = newDuckUrl;
+                tempImg.onload = () => {
+                    duckImage.src = newDuckUrl;
+                    duckImage.classList.remove('loading');
+                    document.body.style.backgroundColor = getRandomColor();
+                };
+            } else {
+                console.error('No duck URLs available');
+            }
+        }
+
+        // Initialize with the first duck image and random background color
+        document.addEventListener('DOMContentLoaded', (event) => {
+            changeDuck();
+        });
+    </script>
+</body>
+</html>
